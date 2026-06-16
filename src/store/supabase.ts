@@ -189,7 +189,7 @@ export const useSupabaseStore = create<SupabaseStoreState>()((set, get) => ({
 
   addOverseasStock: async (stock, userId) => {
     const { data, error } = await supabase.from('overseas_stocks').insert({
-      id: stock.id, user_id: userId, name: stock.name, buy_date: stock.buyDate,
+      user_id: userId, name: stock.name, buy_date: stock.buyDate,
       krw_cost: stock.krwCost, krw_value: stock.krwValue,
       usd_cost: stock.usdCost, usd_value: stock.usdValue, category: stock.category,
     }).select().single()
@@ -216,7 +216,7 @@ export const useSupabaseStore = create<SupabaseStoreState>()((set, get) => ({
 
   addDomesticStock: async (stock, userId) => {
     const { data, error } = await supabase.from('domestic_stocks').insert({
-      id: stock.id, user_id: userId, name: stock.name, buy_date: stock.buyDate,
+      user_id: userId, name: stock.name, buy_date: stock.buyDate,
       cost: stock.cost, value: stock.value, category: stock.category,
     }).select().single()
     if (!error && data) {
@@ -239,7 +239,7 @@ export const useSupabaseStore = create<SupabaseStoreState>()((set, get) => ({
 
   addAlternativeAsset: async (asset, userId) => {
     const { data, error } = await supabase.from('alternative_assets').insert({
-      id: asset.id, user_id: userId, name: asset.name, cost: asset.cost, value: asset.value,
+      user_id: userId, name: asset.name, cost: asset.cost, value: asset.value,
     }).select().single()
     if (!error && data) {
       set(s => ({ alternativeAssets: [...s.alternativeAssets, rowToAlternative(data as Record<string, unknown>)] }))
@@ -270,7 +270,7 @@ export const useSupabaseStore = create<SupabaseStoreState>()((set, get) => ({
 
   addDividend: async (dividend, userId) => {
     const { data, error } = await supabase.from('dividends').insert({
-      id: dividend.id, user_id: userId, year: dividend.year, month: dividend.month,
+      user_id: userId, year: dividend.year, month: dividend.month,
       stock_name: dividend.stockName, amount: dividend.amount,
     }).select().single()
     if (!error && data) {
@@ -293,7 +293,7 @@ export const useSupabaseStore = create<SupabaseStoreState>()((set, get) => ({
 
   addGrowthRecord: async (record, userId) => {
     const { data, error } = await supabase.from('growth_records').insert({
-      id: record.id, user_id: userId, year: record.year, month: record.month,
+      user_id: userId, year: record.year, month: record.month,
       total_asset: record.totalAsset, memo: record.memo, is_auto: record.isAuto,
     }).select().single()
     if (!error && data) {
