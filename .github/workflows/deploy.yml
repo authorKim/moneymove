@@ -27,11 +27,9 @@ jobs:
           node-version: 24
 
       - name: Install dependencies
-        working-directory: webapp
         run: npm install
 
       - name: Build
-        working-directory: webapp
         run: node node_modules/typescript/bin/tsc -b && node node_modules/vite/bin/vite.js build
 
       - name: Setup Pages
@@ -40,7 +38,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: webapp/dist
+          path: dist
 
   deploy:
     environment:
